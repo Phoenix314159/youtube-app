@@ -2,11 +2,12 @@ import _ from 'lodash';
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import YTSearch from 'youtube-api-search';
-import SearchBar from './components/search_bar';
-import VideoList from './components/video_list';
-import VideoDetail from './components/video_detail';
-const API_KEY = // <------Youtube API Key-------->
+import SearchBar from './src/components/search-bar';
+import VideoList from './src/components/video-list';
+import VideoDetail from './src/components/video-detail';
 
+
+const api_key = 'AIzaSyDmS34vdKqePIe__wiRzsvfQn_HMfXMo7k'
 
 class App extends Component {
     constructor(props) {
@@ -18,14 +19,13 @@ class App extends Component {
        this.videoSearch('surfboards');
     }
     videoSearch(term) {
-        YTSearch({key: API_KEY, term: term}, videos => {
+        YTSearch({key: api_key, term: term}, videos => {
             this.setState({
                 videos,
                 selectedVideo: videos[0]
             });
         })
     }
-
     render() {
         const videoSearch = _.debounce(term => {this.videoSearch(term)}, 300);
         return (
@@ -40,4 +40,4 @@ class App extends Component {
     }
 }
 
-ReactDOM.render(<App/>, document.querySelector('.container'));
+ReactDOM.render(<App/>, document.getElementById('app'));
